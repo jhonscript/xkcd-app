@@ -13,7 +13,6 @@ export function Header() {
           <Navbar.Link isActive href="/">
             Home
           </Navbar.Link>
-          <Navbar.Link href="/about">About</Navbar.Link>
           <Navbar.Link href="/search">Search</Navbar.Link>
         </Navbar.Content>
       </Navbar>

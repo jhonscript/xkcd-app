@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container, Card, Row, Text, Grid } from "@nextui-org/react";
 import { Header } from "../components/Header";
 import fs from "fs";
+import { Footer } from "components/Footer";
 
 export default function Home({ latestComics }) {
   return (
@@ -62,6 +63,7 @@ export default function Home({ latestComics }) {
           </Card>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 }
