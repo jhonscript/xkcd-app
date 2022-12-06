@@ -1,63 +1,52 @@
-import Head from "next/head";
 import Image from "next/image";
-import { Header } from "components/Header.js";
-import { Container, Text, Row, Grid, Card, Button } from "@nextui-org/react";
+import { Text, Row, Grid, Card, Button } from "@nextui-org/react";
 import { readFile, stat, readdir } from "fs/promises";
 import { basename } from "path";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 
 export default function Comic({ comic, hasPrevious, hasNext, prevId, nexId }) {
   return (
-    <>
-      <Head>
-        <title>xkcd - Comics for developers</title>
-        <meta name="description" content="Comics for developers" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
-      <Container>
-        <Row justify="center">
-          <Text h1>{comic.title}</Text>
-        </Row>
-        <Row>
-          <Grid.Container gap={2} justify="center">
-            <Image
-              width={comic.width}
-              height={comic.height}
-              src={comic.img}
-              alt={comic.alt}
-            ></Image>
-          </Grid.Container>
-        </Row>
-        <Row justify="center">
-          <Card css={{ mw: "800px" }}>
-            <Card.Body>
-              <Text>{comic.alt}</Text>
-            </Card.Body>
-          </Card>
-        </Row>
-        <Row justify="center">
-          <Button.Group>
-            {hasPrevious && (
-              <Button>
-                <Link href={`/comic/${prevId}`}>
-                  <p style={{ color: "white" }}>Previus</p>
-                </Link>
-              </Button>
-            )}
-            {hasNext && (
-              <Button>
-                <Link href={`/comic/${nexId}`}>
-                  <p style={{ color: "white" }}>Next</p>
-                </Link>
-              </Button>
-            )}
-          </Button.Group>
-        </Row>
-      </Container>
-    </>
+    <Layout title={`xkcd - Comic ${comic}`}>
+      <Row justify="center">
+        <Text h1>{comic.title}</Text>
+      </Row>
+      <Row>
+        <Grid.Container gap={2} justify="center">
+          <Image
+            width={comic.width}
+            height={comic.height}
+            src={comic.img}
+            alt={comic.alt}
+          ></Image>
+        </Grid.Container>
+      </Row>
+      <Row justify="center">
+        <Card css={{ mw: "800px" }}>
+          <Card.Body>
+            <Text>{comic.alt}</Text>
+          </Card.Body>
+        </Card>
+      </Row>
+      <Row justify="center">
+        <Button.Group>
+          {hasPrevious && (
+            <Button>
+              <Link href={`/comic/${prevId}`}>
+                <p style={{ color: "white" }}>Previus</p>
+              </Link>
+            </Button>
+          )}
+          {hasNext && (
+            <Button>
+              <Link href={`/comic/${nexId}`}>
+                <p style={{ color: "white" }}>Next</p>
+              </Link>
+            </Button>
+          )}
+        </Button.Group>
+      </Row>
+    </Layout>
   );
 }
 

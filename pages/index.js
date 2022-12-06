@@ -1,70 +1,60 @@
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import { Container, Card, Row, Text, Grid } from "@nextui-org/react";
-import { Header } from "../components/Header";
+import { Card, Row, Text, Grid } from "@nextui-org/react";
+import Layout from "../components/Layout";
+
 import fs from "fs";
-import { Footer } from "components/Footer";
 
 export default function Home({ latestComics }) {
   return (
-    <>
-      <Head>
-        <title>xkcd - Comics for developers</title>
-        <meta name="description" content="Comics for developers" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Header />
-      <Container>
-        <Row justify="center">
-          <Text
-            h1
-            size={60}
-            css={{
-              textGradient: "45deg, $blue600 -20%, $pink600 50%",
-            }}
-            weight="bold"
-          >
-            Latest Comics
-          </Text>
-        </Row>
-        <Row>
-          <Grid.Container gap={2} justify="center">
-            {latestComics.map((comic) => {
-              return (
-                <Grid key={comic.id}>
-                  <Text h3>{comic.title}</Text>
-                  <Link href={`/comic/${comic.id}`}>
-                    <Image
-                      width={300}
-                      height={300}
-                      layout="intrinsic"
-                      objectFit="contain"
-                      src={comic.img}
-                      alt={comic.alt}
-                    ></Image>
-                  </Link>
-                </Grid>
-              );
-            })}
-          </Grid.Container>
-        </Row>
-        <Row>
-          <Card css={{ $$cardColor: "$colors$primary" }}>
-            <Card.Body>
-              <Row justify="center" align="center">
-                <Text h6 size={15} color="white" css={{ m: 0 }}>
-                  NextUI gives you the best developer experience with all the
-                  features you need for building beautiful and modern websites
-                  and applications.
-                </Text>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Row>
-      </Container>
-      <Footer />
-    </>
+    <Layout title="xkcd - Comics for developers">
+      <Row justify="center">
+        <Text
+          h1
+          size={60}
+          css={{
+            textGradient: "45deg, $blue600 -20%, $pink600 50%",
+          }}
+          weight="bold"
+        >
+          Latest Comics
+        </Text>
+      </Row>
+      <Row>
+        <Grid.Container gap={2} justify="center">
+          {latestComics.map((comic) => {
+            return (
+              <Grid key={comic.id}>
+                <Text h3>{comic.title}</Text>
+                <Link href={`/comic/${comic.id}`}>
+                  <Image
+                    width={300}
+                    height={300}
+                    layout="intrinsic"
+                    objectFit="contain"
+                    src={comic.img}
+                    alt={comic.alt}
+                  ></Image>
+                </Link>
+              </Grid>
+            );
+          })}
+        </Grid.Container>
+      </Row>
+      <Row>
+        <Card css={{ $$cardColor: "$colors$primary" }}>
+          <Card.Body>
+            <Row justify="center" align="center">
+              <Text h6 size={15} color="white" css={{ m: 0 }}>
+                NextUI gives you the best developer experience with all the
+                features you need for building beautiful and modern websites and
+                applications.
+              </Text>
+            </Row>
+          </Card.Body>
+        </Card>
+      </Row>
+    </Layout>
   );
 }
 
