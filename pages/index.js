@@ -30,8 +30,7 @@ export default function Home({ latestComics }) {
                   <Image
                     width={300}
                     height={300}
-                    layout="intrinsic"
-                    objectFit="contain"
+                    style={{ layout: "intrinsic", objectFit: "contain" }}
                     src={comic.img}
                     alt={comic.alt}
                   ></Image>
