@@ -17,7 +17,7 @@ export function I18NProvider({ children }) {
       const translationPluralSingular = valueKey.split("||||");
 
       let translation = "";
-      if (count === 1) translation = translationPluralSingular[0];
+      if (count <= 1) translation = translationPluralSingular[0];
       else translation = translationPluralSingular[1];
 
       if (args.length === 0) return translation;
