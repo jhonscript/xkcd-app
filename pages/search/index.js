@@ -2,12 +2,26 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import { search } from "services/search.js";
+import { useI18N } from "context/i18n";
 
 export default function Search({ query, results }) {
+  const { translate } = useI18N();
   return (
-    <Layout title={`Resultados para ${query}`}>
+    <Layout
+      title={translate(
+        "SEARCH_RESULTS_TITLE",
+        { count: results.length },
+        results.length,
+        query
+      )}
+    >
       <h1>
-        {results.length} resultados para {query}
+        {translate(
+          "SEARCH_RESULTS_TITLE",
+          { count: results.length },
+          results.length,
+          query
+        )}
       </h1>
       {results.map((result) => {
         return (
@@ -32,7 +46,6 @@ export async function getServerSideProps(context) {
 
   const { results } = await search({ query: q });
 
-  console.log(results);
   return {
     props: {
       query: q,

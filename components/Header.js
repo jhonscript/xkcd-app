@@ -1,26 +1,31 @@
-import { Navbar, Text, Input, Link, Card } from "@nextui-org/react";
+import { Navbar, Text, Input, Card } from "@nextui-org/react";
+import { useRouter } from "next/router";
 import { useState, useRef } from "react";
+import Link from "next/link";
 
 export function Header() {
   const [results, setResults] = useState([]);
   const searchRef = useRef();
+  const { locale, locales } = useRouter();
 
   const getValueSearch = () => searchRef?.current?.value;
 
-  var q;
+  let q;
   const handleChange = () => {
     q = getValueSearch();
-    console.log(q);
+
     fetch(`/api/search?q=${q}`)
       .then((res) => res.json())
       .then((searchResults) => {
-        console.log(searchResults);
         setResults(searchResults);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("ERROR /api/search?q=: ", error);
       });
   };
+
+  const restOfLocales = locales.filter((item) => item !== locale);
+
   return (
     <header>
       <Navbar isBordered>
@@ -31,6 +36,11 @@ export function Header() {
         </Navbar.Brand>
         <Navbar.Content hideIn="xs">
           <Navbar.Link href="/">Home</Navbar.Link>
+          <Navbar.Item>
+            <Link href="/" locale={restOfLocales[0]}>
+              {restOfLocales[0]}
+            </Link>
+          </Navbar.Item>
           <Navbar.Item>
             <>
               <Input

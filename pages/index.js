@@ -2,12 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, Row, Text, Grid } from "@nextui-org/react";
 import Layout from "../components/Layout";
-
+import { useI18N } from "context/i18n";
 import fs from "fs";
 
 export default function Home({ latestComics }) {
+  const { translate } = useI18N();
+
   return (
-    <Layout title="xkcd - Comics for developers">
+    <Layout title={translate("SEO_TITLE_DEFAULT")}>
       <Row justify="center">
         <Text
           h1
@@ -17,7 +19,7 @@ export default function Home({ latestComics }) {
           }}
           weight="bold"
         >
-          Latest Comics
+          {translate("LATEST_COMICS")}
         </Text>
       </Row>
       <Row>
@@ -66,7 +68,7 @@ export async function getStaticProps(context) {
     return JSON.parse(content);
   });
   const latestComics = await Promise.all(promisesReadFiles);
-  console.log(latestComics);
+
   return {
     props: { latestComics },
   };
