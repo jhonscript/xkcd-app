@@ -1,6 +1,9 @@
 const algoliasearch = require("algoliasearch");
 
-const client = algoliasearch("OLCIJRFOMJ", "bafc5abc7e9ab75b631561996f484606");
+const APP_ID = process.env.APP_ID;
+const API_KEY = process.env.API_KEY;
+
+const client = algoliasearch(APP_ID, API_KEY);
 const index = client.initIndex("prod_comics");
 
 const CACHE = [];
